@@ -1,0 +1,31 @@
+<Project Sdk="Godot.NET.Sdk/4.3.0">
+
+    <PropertyGroup>
+        <OutputType>Library</OutputType>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>disable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <EnableDynamicLoading>true</EnableDynamicLoading>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <AssemblyName>pathmage.KnightmareEngine</AssemblyName>
+        <RootNamespace>pathmage.KnightmareEngine</RootNamespace>
+        <Title>pathmage.KnightmareEngine</Title>
+<!--        <PackageId>pathmage.ToolKit</PackageId>-->
+        <Authors>Adam Knight (pathmage)</Authors>
+<!--        <RepositoryUrl>https://github.com/pathmage-dev/knightmare-engine</RepositoryUrl>-->
+<!--        <PackageLicenseFile>LICENSE</PackageLicenseFile>-->
+<!--        <PackageReadmeFile>README.md</PackageReadmeFile>-->
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="pathmage.ToolKit" Version="1.0.1" />
+    </ItemGroup>
+
+<!--    <ItemGroup>-->
+<!--        <None Include="../LICENSE" Pack="true" PackagePath=""/>-->
+<!--        <None Include="../README.md" Pack="true" PackagePath=""/>-->
+<!--    </ItemGroup>-->
+
+</Project>
