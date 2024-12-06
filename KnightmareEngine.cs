@@ -20,6 +20,6 @@ public sealed partial class KnightmareEngine : Node, Plugin<KnightmareEngine>
 	public static void Load(Assembly assembly, string file_path)
 	{
 		print(file_path);
-		print(ProjectSettings.GlobalizePath("res://"));
+		print(ProjectSettings.GlobalizePath(file_path));
 	}
 }
