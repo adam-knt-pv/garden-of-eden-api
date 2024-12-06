@@ -1,12 +1,13 @@
 ﻿using System.Collections.Frozen;
+using System.Reflection;
 
 namespace pathmage.KnightmareEngine;
 
 public interface Plugin<TSelf>
 	where TSelf : Plugin<TSelf>
 {
-	public interface Scene { }
+	interface Scene { }
 
-	public interface Scene<TScene> : Scene
+	interface Scene<TScene> : Scene
 		where TScene : Node, Scene<TScene> { }
 }

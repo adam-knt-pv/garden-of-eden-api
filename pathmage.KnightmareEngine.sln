@@ -1,6 +1,6 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnightmareEngine", "KnightmareEngine.csproj", "{67CFD4F5-CB0D-4B5B-AA5C-C5E3CDB79C2A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pathmage.KnightmareEngine", "pathmage.KnightmareEngine.csproj", "{67CFD4F5-CB0D-4B5B-AA5C-C5E3CDB79C2A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
