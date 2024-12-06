@@ -23,6 +23,10 @@
       <PackageReference Include="pathmage.ToolKit" Version="1.0.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="utilities\types\" />
+    </ItemGroup>
+
 <!--    <ItemGroup>-->
 <!--        <None Include="../LICENSE" Pack="true" PackagePath=""/>-->
 <!--        <None Include="../README.md" Pack="true" PackagePath=""/>-->

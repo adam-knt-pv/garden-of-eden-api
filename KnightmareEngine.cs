@@ -7,7 +7,7 @@ using pathmage.ToolKit.Debug;
 
 namespace pathmage.KnightmareEngine;
 
-public sealed partial class KnightmareEngine : Node
+public sealed partial class KnightmareEngine : Node, Game.Scene<KnightmareEngine>
 {
 	static KnightmareEngine()
 	{
