@@ -9,52 +9,17 @@ using pathmage.ToolKit.Debug;
 
 namespace pathmage.KnightmareEngine;
 
-partial class Y : Node, Game.ISceneLoadHelper<Y>;
-
-partial class X : Y, Game.ISceneLoadHelper<X>;
-
 public sealed partial class KnightmareEngine : Node, Plugin<KnightmareEngine>
 {
 	static KnightmareEngine()
 	{
 		Logger.Singleton = new LoggerWrapper(GD.Print);
 
-		foreach (var file in "res://".PickSceneFiles())
-		{
-			print(GD.Load<PackedScene>(file).Instantiate());
-		}
+		var version = new PluginVersion(PluginVersion.DevelopmentPhases.Alpha, "1.0.0_01");
 
-		// Plugin.findSceneFiles(DirAccess.Open("res://"));
-		// foreach (var type in Plugin.FindSceneTypes(typeof(KnightmareEngine).Assembly))
-		// 	print(type.ToText());
-
-		// print("OS PATH", OS.GetExecutablePath().GetBaseDir());
-		// print("Project settings path", ProjectSettings.GlobalizePath("res://"));
-		//
-		// var path = OS.GetExecutablePath();
-		//
-		// if (OS.HasFeature("editor"))
-		// 	path = ProjectSettings.GlobalizePath("res://");
-		//
-		// print(path);
-		// foreach (var file in DirAccess.GetFilesAt(path))
-		// 	print(file);
-		// Load(typeof(KnightmareEngine).Assembly, ProjectSettings.GlobalizePath("res://"));
+		print(version, version.ToFilename());
+		print(PluginVersion.FromFilename("indev-v1.0.0_01"));
 	}
-
-	// public override void _Ready()
-	// {
-	// 	var assembly = Assembly.LoadFile($"{Directory.GetCurrentDirectory()}/pathmage.Knighturn.dll");
-	// 	print(assembly);
-	// 	ProjectSettings.LoadResourcePack("res://Knighturn.pck");
-	// 	AddChild(GD.Load<PackedScene>("res://ui/user-interface.tscn").Instantiate());
-	// }
-	//
-	// public static void Load(Assembly assembly, string file_path)
-	// {
-	// 	print(file_path);
-	// 	print(ProjectSettings.GlobalizePath(file_path));
-	// }
 }
 
 public static partial class Extensions;
