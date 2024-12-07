@@ -4,22 +4,24 @@ namespace pathmage.KnightmareEngine;
 
 public interface Plugin
 {
-	static void Load(Assembly assembly)
+	static void Load(Assembly assembly, string local_path)
 	{
-		foreach (var type in assembly.GetTypesWithInterface<ISceneLoadHelper>())
+		foreach (var type in assembly.GetTypesWithInterface<Scene>())
 		{
 			print(type.ToText());
 		}
 	}
 
-	interface ISceneLoadHelper;
+	interface Scene { }
 }
 
 public interface Plugin<TSelf> : Plugin
 	where TSelf : Plugin<TSelf>
 {
-	interface Scene { }
+	static void Load() => Load(typeof(TSelf).Assembly, "res://");
 
-	interface ISceneLoadHelper<TScene> : Scene, ISceneLoadHelper
-		where TScene : Node, ISceneLoadHelper<TScene> { }
+	new interface Scene : Plugin.Scene { }
+
+	interface Scene<TScene> : Scene
+		where TScene : Node, Scene<TScene> { }
 }

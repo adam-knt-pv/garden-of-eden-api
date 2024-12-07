@@ -9,7 +9,10 @@ using pathmage.ToolKit.Debug;
 
 namespace pathmage.KnightmareEngine;
 
-public sealed partial class KnightmareEngine : Node, Plugin<KnightmareEngine>
+public sealed partial class KnightmareEngine
+	: Node,
+		Plugin<KnightmareEngine>,
+		Plugin<KnightmareEngine>.Scene<KnightmareEngine>
 {
 	static KnightmareEngine()
 	{
@@ -19,6 +22,7 @@ public sealed partial class KnightmareEngine : Node, Plugin<KnightmareEngine>
 
 		print(version, version.ToFilename());
 		print(PluginVersion.FromFilename("indev-v1.0.0_01"));
+		Plugin<KnightmareEngine>.Load();
 	}
 }
 
