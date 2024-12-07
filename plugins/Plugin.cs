@@ -6,9 +6,31 @@ public interface Plugin
 {
 	static void Load(Assembly assembly, string local_path)
 	{
-		foreach (var type in assembly.GetTypesWithInterface<Scene>())
+		var plugin_type = assembly.GetTypesWithInterface<Plugin>()[0];
+
+		var scene_types = assembly.GetTypesWithInterface<Scene>();
+
+		var scene_files = local_path.FindSceneFiles();
+
+		while (scene_types.Count != 0)
 		{
-			print(type.ToText());
+			var scene_type = scene_types[0];
+			var scene_type_name = scene_type.Name.ToSnakeCase();
+
+			var i = 0;
+			while (scene_files.Count != 0)
+			{
+				if (scene_files[i].EndsWith($"/{scene_type_name}.tscn"))
+				{
+					print(scene_type.ToText(), scene_type_name, scene_files[i]);
+					scene_types.Remove(0);
+					scene_files.Remove(i);
+					i = 0;
+					continue;
+				}
+
+				i++;
+			}
 		}
 	}
 
