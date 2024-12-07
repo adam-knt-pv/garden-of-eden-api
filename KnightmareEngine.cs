@@ -19,8 +19,10 @@ public sealed partial class KnightmareEngine : Node, Plugin<KnightmareEngine>
 	{
 		Logger.Singleton = new LoggerWrapper(GD.Print);
 
-		foreach (var file in "res://".GetAllSceneFiles())
-			print(file);
+		foreach (var file in "res://".PickSceneFiles())
+		{
+			print(GD.Load<PackedScene>(file).Instantiate());
+		}
 
 		// Plugin.findSceneFiles(DirAccess.Open("res://"));
 		// foreach (var type in Plugin.FindSceneTypes(typeof(KnightmareEngine).Assembly))
