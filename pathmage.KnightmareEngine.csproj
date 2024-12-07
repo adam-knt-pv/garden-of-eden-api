@@ -20,11 +20,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="pathmage.ToolKit" Version="1.0.2" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="utilities\types\" />
+      <PackageReference Include="pathmage.ToolKit" Version="1.0.3" />
     </ItemGroup>
 
 <!--    <ItemGroup>-->

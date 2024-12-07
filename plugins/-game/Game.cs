@@ -1,10 +1,5 @@
-﻿namespace pathmage.KnightmareEngine;
+﻿using System.Reflection;
 
-public interface Game : Plugin<Game>
-{
-	static void Load()
-	{
-		foreach (var dir in DirAccess.GetDirectoriesAt("res://"))
-			print(dir);
-	}
-}
+namespace pathmage.KnightmareEngine;
+
+public interface Game : Plugin<Game> { }
