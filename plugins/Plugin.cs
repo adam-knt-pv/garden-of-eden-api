@@ -9,7 +9,7 @@ public interface Plugin
 	static void Load(Assembly assembly, string local_path)
 	{
 		var scene_types = assembly.GetTypesWithInterface<Scene>();
-		var scene_files = local_path.FindSceneFiles();
+		var scene_files = local_path.FindSceneFiles("pathmage.KnightmareEngine");
 		var scenes = Vec<(Type Type, string LocalPath)>.With(scene_types.Count);
 
 		foreach (var type in scene_types)
