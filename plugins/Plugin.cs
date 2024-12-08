@@ -64,7 +64,7 @@ public interface Plugin
 }
 
 public interface Plugin<TPlugin> : Plugin
-	where TPlugin : Node, Plugin<TPlugin>
+	where TPlugin : Plugin<TPlugin>
 {
 	static string DirPath = "res://";
 	static string DataDirPath = $"user://.{Version.ToFilename()}/";
@@ -74,7 +74,6 @@ public interface Plugin<TPlugin> : Plugin
 	/// </summary>
 	static PluginVersion Version = TPlugin.version_history[0];
 
-	static abstract Node Instance { get; }
 	protected static abstract PluginVersion[] version_history { get; }
 
 	private static FrozenDictionary<string, int> scene_to_id = null!;
@@ -82,7 +81,11 @@ public interface Plugin<TPlugin> : Plugin
 	static Plugin()
 	{
 		DirAccess.MakeDirAbsolute(DataDirPath);
-		Constants.Node.Root = TPlugin.Instance.GetNode<Window>("/root");
+	}
+
+	protected static void Initialize(Node any_node)
+	{
+		Constants.Node.Root = any_node.GetNode<Window>("/root");
 		Constants.Node.SceneTree = Constants.Node.Root.GetTree();
 	}
 
