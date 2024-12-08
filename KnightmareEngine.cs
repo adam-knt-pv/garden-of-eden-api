@@ -9,7 +9,7 @@ using pathmage.ToolKit.Debug;
 
 namespace pathmage.KnightmareEngine;
 
-public sealed partial class KnightmareEngine : Node, Plugin<KnightmareEngine>
+public sealed partial class KnightmareEngine : Node
 {
 	static KnightmareEngine()
 	{

@@ -1,11 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://uyntjitwi7uh"]
+[gd_scene load_steps=3 format=3 uid="uid://bxnn7ovmonkn2"]
 
-[ext_resource type="Script" path="res://utilities/extensions/Test.cs" id="1_jrnr5"]
 [ext_resource type="Texture2D" uid="uid://c24mb3g02xwmd" path="res://icon.svg" id="2_xytal"]
+
+[sub_resource type="CSharpScript" id="CSharpScript_iy5by"]
+script/source = "namespace pathmage.KnightmareEngine;
+
+public partial class Test : Node2D, Plugin<KnightmareEngine>.Scene<Test> { }
+"
 
 [node name="Test" type="Node2D"]
 position = Vector2(212, 168)
-script = ExtResource("1_jrnr5")
+script = SubResource("CSharpScript_iy5by")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_xytal")

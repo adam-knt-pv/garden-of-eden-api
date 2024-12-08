@@ -2,17 +2,18 @@
 
 public readonly struct PluginVersion
 {
-	public DevelopmentPhases Phase { get; }
+	public static PluginVersion Null = "Indev v-1.-1.-1";
+
+	public Phases Phase { get; }
 	public int Prefix { get; }
 	public int Major { get; }
 	public int Minor { get; }
 	public int Suffix { get; } = -1;
 
-	public static implicit operator PluginVersion(
-		(DevelopmentPhases Phase, string Version) version
-	) => new(version.Phase, version.Version);
+	public static implicit operator PluginVersion((Phases Phase, string Version) version) =>
+		new(version.Phase, version.Version);
 
-	public PluginVersion(DevelopmentPhases phase, string version)
+	public PluginVersion(Phases phase, string version)
 		: this($"{phase} {version}") { }
 
 	public static implicit operator PluginVersion(string version) => new(version);
@@ -20,7 +21,7 @@ public readonly struct PluginVersion
 	public PluginVersion(string version)
 	{
 		var phase_version = version.Split(' ');
-		Phase = Enum.Parse<DevelopmentPhases>(phase_version[0]);
+		Phase = Enum.Parse<Phases>(phase_version[0]);
 
 		var split_version = phase_version[1].Split('.', '_');
 		Prefix = int.Parse(split_version[0][0] == 'v' ? split_version[0][1..] : split_version[0]);
@@ -40,13 +41,14 @@ public readonly struct PluginVersion
 
 	public static PluginVersion FromFilename(string filename)
 	{
-		var phase_version = filename.Split('-');
+		var i = filename.IndexOf('-');
+		var phase_version = new[] { filename[..i], filename[(i + 1)..] };
 		return new PluginVersion(
 			$"{phase_version[0][0].ToUpper()}{phase_version[0][1..]} {phase_version[1]}"
 		);
 	}
 
-	public enum DevelopmentPhases
+	public enum Phases
 	{
 		Indev,
 		Alpha,
