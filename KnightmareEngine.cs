@@ -14,20 +14,6 @@ public sealed partial class KnightmareEngine : Node, Plugin<KnightmareEngine>
 	static KnightmareEngine()
 	{
 		Logger.Singleton = new LoggerWrapper(GD.Print);
-
-		var version = new PluginVersion(PluginVersion.DevelopmentPhases.Alpha, "1.0.0_01");
-
-		print(version, version.ToFilename());
-		print(PluginVersion.FromFilename("indev-v1.0.0_01"));
-		Plugin<KnightmareEngine>.Load();
-	}
-
-	public override void _Ready()
-	{
-		AddChild(Plugin<KnightmareEngine>.Scene.New("Test"));
-		AddChild(Plugin<KnightmareEngine>.Scene.New<Test>("Test"));
-
-		AddChild(Plugin<KnightmareEngine>.Scene<Test>.New());
 	}
 }
 
