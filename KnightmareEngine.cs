@@ -17,9 +17,6 @@ public sealed partial class KnightmareEngine : Node
 
 		// using var file = EnumFile<Test>.Open("user://test.txt");
 
-#if DEBUG
-		print("DEBUG KNIGHTMARE ENGINE");
-#endif
 		// file[Test.a] = "abc";
 		// file[Test.b] = "def";
 
@@ -27,6 +24,15 @@ public sealed partial class KnightmareEngine : Node
 		// {
 		// 	print(item);
 		// }
+	}
+
+	public static void TestDebug()
+	{
+#if DEBUG
+		print("DEBUG KNIGHTMARE ENGINE");
+#else
+		print("RELEASE KNIGHTMARE ENGINE");
+#endif
 	}
 
 	enum Test
