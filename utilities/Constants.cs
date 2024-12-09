@@ -2,9 +2,11 @@
 
 public interface Constants : ToolKit.Constants
 {
-	new interface Reflection : ToolKit.Constants.Reflection;
+	new interface File : ToolKit.Constants.File;
 
 	new interface Text : ToolKit.Constants.Text;
+
+	new interface Reflection : ToolKit.Constants.Reflection;
 
 	interface Node
 	{
