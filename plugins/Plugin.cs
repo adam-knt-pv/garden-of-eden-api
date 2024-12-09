@@ -83,12 +83,6 @@ public interface Plugin<TPlugin> : Plugin
 		DirAccess.MakeDirAbsolute(DataDirPath);
 	}
 
-	protected static void Initialize(Node any_node)
-	{
-		Constants.Node.Root = any_node.GetNode<Window>("/root");
-		Constants.Node.SceneTree = Constants.Node.Root.GetTree();
-	}
-
 	static void Load() => Load(typeof(TPlugin).Assembly, "res://");
 
 	/// <summary>
