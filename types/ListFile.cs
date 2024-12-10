@@ -26,10 +26,10 @@ public readonly struct ListFile<TEnum>(string local_path, string[] items) : IDis
 	{
 		if (!FileAccess.FileExists(local_path))
 		{
-			using var file_access = FileAccess.Open(local_path, FileAccess.ModeFlags.Write);
+			using var file = FileAccess.Open(local_path, FileAccess.ModeFlags.Write);
 
 			foreach (var _ in enum_length)
-				file_access.StoreLine("");
+				file.StoreLine("");
 		}
 
 		return new(local_path);
@@ -52,10 +52,10 @@ public readonly struct ListFile<TEnum>(string local_path, string[] items) : IDis
 	{
 		this.local_path = local_path;
 
-		using var new_file = FileAccess.Open(local_path, FileAccess.ModeFlags.Read);
+		using var file = FileAccess.Open(local_path, FileAccess.ModeFlags.Read);
 
 		foreach (var i in enum_length)
-			items[i] = new_file.GetLine();
+			items[i] = file.GetLine();
 	}
 
 	public void Dispose() => Save();
