@@ -15,6 +15,26 @@ public sealed partial class KnightmareEngine : Node
 	{
 		Logger.Singleton = new LoggerWrapper(GD.Print);
 	}
+
+	public override void _Ready()
+	{
+		using var file = ListFile<Test>.CreateOrOpen("user://test.txt");
+		file.Array<string>(Test.A);
+		file.Save();
+
+		var file_arr = file.Array<string>(Test.A);
+
+		foreach (var i in file_arr.Length)
+			print(i, file_arr[i]);
+
+		print(nameof(file_arr.Length), file_arr.Length);
+	}
+
+	enum Test
+	{
+		[FileArray<string>]
+		A,
+	}
 }
 
 public static partial class Extensions;

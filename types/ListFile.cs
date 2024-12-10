@@ -96,6 +96,10 @@ public readonly struct ListFile<TEnum>(string local_path, string[] items) : IDis
 		CheckFieldType<T>(at);
 #endif
 		var split_items = this[at].Split(Constants.File.ItemSeparator);
+
+		if (split_items is [""])
+			return [];
+
 		var result = new T[split_items.Length];
 
 		foreach (var i in result.Length)
