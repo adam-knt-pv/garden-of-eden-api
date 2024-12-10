@@ -66,13 +66,13 @@ public interface Plugin
 public interface Plugin<TPlugin> : Plugin
 	where TPlugin : Plugin<TPlugin>
 {
-	static string DirPath = "res://";
-	static string DataDirPath = $"user://.{TPlugin.version_history[0].ToFilename()}/";
-
 	/// <summary>
 	/// The current (latest) version of the plugin.
 	/// </summary>
 	static PluginVersion Version = TPlugin.version_history[0];
+
+	static string DirPath = "res://";
+	static string DataDirPath = $"user://.{Version.ToFilename()}/";
 
 	protected static abstract PluginVersion[] version_history { get; }
 
