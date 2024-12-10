@@ -1,6 +1,8 @@
-﻿namespace pathmage.KnightmareEngine;
+﻿using System.Diagnostics.CodeAnalysis;
 
-public readonly struct PluginVersion
+namespace pathmage.KnightmareEngine;
+
+public readonly struct PluginVersion : IParsable<PluginVersion>
 {
 	public static PluginVersion Null = "Indev v-1.-1.-1";
 
@@ -46,6 +48,24 @@ public readonly struct PluginVersion
 		return new PluginVersion(
 			$"{phase_version[0][0].ToUpper()}{phase_version[0][1..]} {phase_version[1]}"
 		);
+	}
+
+	public static PluginVersion Parse(string s, IFormatProvider? provider) => new(s);
+
+	public static bool TryParse(
+		[NotNullWhen(true)] string? s,
+		IFormatProvider? provider,
+		out PluginVersion result
+	)
+	{
+		if (s != null)
+		{
+			result = new(s);
+			return true;
+		}
+
+		result = Null;
+		return false;
 	}
 
 	public enum Phases

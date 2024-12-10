@@ -13,8 +13,10 @@ public interface Constants : ToolKit.Constants
 		const string RootPath = "/root";
 	}
 
-	interface Online
+	interface Multiplayer
 	{
+		const char ServerAddressSeparator = '#';
+
 		const int MinPort = 1024;
 		const int DefaultPort = 5121;
 		const int MaxPort = 65535;

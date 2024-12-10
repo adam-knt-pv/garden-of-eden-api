@@ -8,7 +8,7 @@ using System.Reflection;
 
 namespace pathmage.KnightmareEngine;
 
-public readonly struct File<TEnum>(string local_path, string[] items) : IDisposable
+public readonly struct ListFile<TEnum>(string local_path, string[] items) : IDisposable
 	where TEnum : struct, Enum
 {
 	readonly string local_path = local_path;
@@ -22,7 +22,7 @@ public readonly struct File<TEnum>(string local_path, string[] items) : IDisposa
 
 	static readonly int enum_length = Enum.GetNames<TEnum>().Length;
 
-	public static File<TEnum> CreateOrOpen(string local_path)
+	public static ListFile<TEnum> CreateOrOpen(string local_path)
 	{
 		if (!FileAccess.FileExists(local_path))
 		{
@@ -35,7 +35,7 @@ public readonly struct File<TEnum>(string local_path, string[] items) : IDisposa
 		return new(local_path);
 	}
 
-	public static bool TryOpen(string local_path, out File<TEnum> file)
+	public static bool TryOpen(string local_path, out ListFile<TEnum> file)
 	{
 		if (FileAccess.FileExists(local_path))
 		{
@@ -47,7 +47,7 @@ public readonly struct File<TEnum>(string local_path, string[] items) : IDisposa
 		return false;
 	}
 
-	public File(string local_path)
+	public ListFile(string local_path)
 		: this(local_path, new string[enum_length])
 	{
 		this.local_path = local_path;
