@@ -72,7 +72,7 @@ public interface Plugin<TPlugin> : Plugin
 	static PluginVersion Version = TPlugin.version_history[0];
 
 	static string DirPath = "res://";
-	static string DataDirPath = $"user://.{Version.ToFilename()}/";
+	static string DataDirPath = $"user://{Version.ToFilename()}/";
 
 	protected static abstract PluginVersion[] version_history { get; }
 
