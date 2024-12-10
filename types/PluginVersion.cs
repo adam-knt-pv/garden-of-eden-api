@@ -39,10 +39,7 @@ public readonly struct PluginVersion : IParsable<PluginVersion>
 	public override string ToString() =>
 		$"{Enum.GetName(Phase)} v{Prefix}.{Major}.{Minor}{(Suffix == -1 ? "" : $"_{(Suffix > 9 ? Suffix : $"0{Suffix}")}")}";
 
-	public string ToFilename() =>
-		$"{Enum.GetName(Phase)} v{Prefix}.{Major}.{Minor}_{(Suffix > 9 ? Suffix : $"0{Suffix}")}"
-			.ToLower()
-			.Replace(' ', '-');
+	public string ToFilename() => ToString().ToLower().Replace(' ', '-');
 
 	public static PluginVersion FromFilename(string filename)
 	{
