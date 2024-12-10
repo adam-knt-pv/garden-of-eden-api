@@ -51,29 +51,29 @@ partial class Extensions
 	{
 		var result = Set<string>.With(100);
 
-		recursive(local_path);
+		searchDir(local_path);
 
-		void recursive(string curr_path)
+		void searchDir(string at_path)
 		{
-			var curr_dir = DirAccess.Open(curr_path);
+			var curr_dir = DirAccess.Open(at_path);
 
 			foreach (var file in curr_dir.GetFiles())
 				if (filter(file))
-					result.Append(curr_path.PathJoin(file));
+					result.Append(at_path.PathJoin(file));
 
 			foreach (var child_dir in curr_dir.GetDirectories())
 			{
 				if (exclude_dirs.Contains(child_dir))
 					continue;
 
-				var child_dir_path = curr_path.PathJoin(child_dir);
+				var child_dir_path = at_path.PathJoin(child_dir);
 				var child_dir_access = DirAccess.Open(child_dir_path);
 
 				if (
 					child_dir_access.GetDirectories().Length > 0
 					|| child_dir_access.GetFiles().Length > 0
 				)
-					recursive(child_dir_path);
+					searchDir(child_dir_path);
 			}
 		}
 
