@@ -111,6 +111,8 @@ public interface Plugin<TPlugin> : Plugin
 
 		static TScene New<TScene>(string scene)
 			where TScene : Node => scenes[scene_to_id[scene]].Instantiate<TScene>();
+
+		static PackedScene Packed(string scene) => scenes[scene_to_id[scene]];
 	}
 
 	interface Scene<TScene> : Scene
@@ -119,5 +121,7 @@ public interface Plugin<TPlugin> : Plugin
 		private static int id = -1;
 
 		static TScene New() => scenes[id].Instantiate<TScene>();
+
+		static new PackedScene Packed(string scene) => scenes[id];
 	}
 }

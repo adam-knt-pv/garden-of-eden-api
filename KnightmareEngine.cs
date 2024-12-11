@@ -11,16 +11,15 @@ namespace pathmage.KnightmareEngine;
 
 public sealed partial class KnightmareEngine : Node
 {
-	static KnightmareEngine()
+	KnightmareEngine()
 	{
 		Logger.Singleton = new LoggerWrapper(GD.Print);
 	}
 
 	public override void _Ready()
 	{
-		using var file = ListFile<Test>.CreateOrOpen("user://test.txt");
-		file.Array<string>(Test.A);
-		file.Save();
+		using var file = LineFile<Test>.CreateOrOpen("user://test.txt");
+		file.Array<string>(Test.A, "1", "2", "3", "4");
 
 		var file_arr = file.Array<string>(Test.A);
 
@@ -32,7 +31,7 @@ public sealed partial class KnightmareEngine : Node
 
 	enum Test
 	{
-		[FileArray<string>]
+		[LineFileArray<string>]
 		A,
 	}
 }

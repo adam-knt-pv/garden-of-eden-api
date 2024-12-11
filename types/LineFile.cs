@@ -8,59 +8,64 @@ using System.Reflection;
 
 namespace pathmage.KnightmareEngine;
 
-public readonly struct ListFile<TEnum>(string local_path, string[] items) : IDisposable
+[AttributeUsage(AttributeTargets.Field)]
+public class LineFileFieldAttribute<T> : Attribute
+	where T : IParsable<T>;
+
+[AttributeUsage(AttributeTargets.Field)]
+public sealed class LineFileArrayAttribute<T> : Attribute
+	where T : IParsable<T>;
+
+public readonly struct LineFile<TEnum>(string local_path) : IDisposable
 	where TEnum : struct, Enum
 {
 	readonly string local_path = local_path;
+	readonly string[] items = new string[enum_length];
+
+	public int LineCount => enum_length;
+	static readonly int enum_length = Enum.GetNames<TEnum>().Length;
 
 	public string this[TEnum at]
 	{
-		get => items[Convert.ToInt32(at)];
-		set => items[Convert.ToInt32(at)] = value;
+		get => this[Convert.ToInt32(at)];
+		set => this[Convert.ToInt32(at)] = value;
 	}
-	readonly string[] items = items;
 
-	static readonly int enum_length = Enum.GetNames<TEnum>().Length;
+	public string this[int at]
+	{
+		get => items[at];
+		set => items[at] = value;
+	}
 
-	public static ListFile<TEnum> CreateOrOpen(string local_path)
+	public static LineFile<TEnum> CreateOrOpen(string local_path)
 	{
 		if (!FileAccess.FileExists(local_path))
-		{
-			using var file = FileAccess.Open(local_path, FileAccess.ModeFlags.Write);
+			Create(local_path);
 
-			foreach (var _ in enum_length)
-				file.StoreLine("");
-		}
-
-		return new(local_path);
+		return Open(local_path);
 	}
 
-	public static bool TryOpen(string local_path, out ListFile<TEnum> file)
+	public static void Create(string local_path)
 	{
-		if (FileAccess.FileExists(local_path))
-		{
-			file = new(local_path);
-			return true;
-		}
+		using var file = FileAccess.Open(local_path, FileAccess.ModeFlags.Write);
 
-		file = default;
-		return false;
+		foreach (var _ in enum_length)
+			file.StoreLine("");
 	}
 
-	public ListFile(string local_path)
-		: this(local_path, new string[enum_length])
+	public static LineFile<TEnum> Open(string local_path)
 	{
-		this.local_path = local_path;
+		var result = new LineFile<TEnum>(local_path);
 
 		using var file = FileAccess.Open(local_path, FileAccess.ModeFlags.Read);
 
 		foreach (var i in enum_length)
-			items[i] = file.GetLine();
+			result.items[i] = file.GetLine();
+
+		return result;
 	}
 
-	public void Dispose() => Save();
-
-	public void Save()
+	public void Dispose()
 	{
 		using var file = FileAccess.Open(local_path, FileAccess.ModeFlags.Write);
 
@@ -72,7 +77,7 @@ public readonly struct ListFile<TEnum>(string local_path, string[] items) : IDis
 		where T : IParsable<T>
 	{
 #if FILE_CHECKS
-		CheckFieldAttribute(at, typeof(FileFieldAttribute<>).Name);
+		CheckFieldAttribute(at, typeof(LineFileFieldAttribute<>).Name);
 		CheckFieldType<T>(at);
 #endif
 		return T.Parse(this[at], null);
@@ -82,17 +87,17 @@ public readonly struct ListFile<TEnum>(string local_path, string[] items) : IDis
 		where T : IParsable<T>
 	{
 #if FILE_CHECKS
-		CheckFieldAttribute(at, typeof(FileFieldAttribute<>).Name);
+		CheckFieldAttribute(at, typeof(LineFileFieldAttribute<>).Name);
 		CheckFieldType<T>(at);
 #endif
-		this[at] = value.ToString()!;
+		this[at] = value.ToString() ?? "";
 	}
 
 	public T[] Array<T>(TEnum at)
 		where T : IParsable<T>
 	{
 #if FILE_CHECKS
-		CheckFieldAttribute(at, typeof(FileArrayAttribute<>).Name);
+		CheckFieldAttribute(at, typeof(LineFileArrayAttribute<>).Name);
 		CheckFieldType<T>(at);
 #endif
 		var split_items = this[at].Split(Constants.File.ItemSeparator);
@@ -112,13 +117,13 @@ public readonly struct ListFile<TEnum>(string local_path, string[] items) : IDis
 		where T : IParsable<T>
 	{
 #if FILE_CHECKS
-		CheckFieldAttribute(at, typeof(FileArrayAttribute<>).Name);
+		CheckFieldAttribute(at, typeof(LineFileArrayAttribute<>).Name);
 		CheckFieldType<T>(at);
 #endif
 		var result = new string[values.Length];
 
 		foreach (var i in result.Length)
-			result[i] = values[i].ToString()!;
+			result[i] = values[i].ToString() ?? "";
 
 		this[at] = string.Join(Constants.File.ItemSeparator, result);
 	}
