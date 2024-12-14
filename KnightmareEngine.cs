@@ -18,7 +18,7 @@ public sealed partial class KnightmareEngine : Node
 
 	public override void _Ready()
 	{
-		using var file = LineFile<Test>.CreateOrOpen("user://test.txt");
+		using var file = EnumFile<Test>.CreateOrOpen("user://test.txt");
 		file.Array<string>(Test.A, "1", "2", "3", "4");
 
 		var file_arr = file.Array<string>(Test.A);
@@ -31,7 +31,7 @@ public sealed partial class KnightmareEngine : Node
 
 	enum Test
 	{
-		[LineFileArray<string>]
+		[EnumFileArray<string>]
 		A,
 	}
 }

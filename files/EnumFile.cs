@@ -9,21 +9,20 @@ using System.Reflection;
 namespace pathmage.KnightmareEngine;
 
 [AttributeUsage(AttributeTargets.Field)]
-public class LineFileFieldAttribute<T> : Attribute
+public class EnumFileFieldAttribute<T> : Attribute
 	where T : IParsable<T>;
 
 [AttributeUsage(AttributeTargets.Field)]
-public sealed class LineFileArrayAttribute<T> : Attribute
+public sealed class EnumFileArrayAttribute<T> : Attribute
 	where T : IParsable<T>;
 
-public readonly struct LineFile<TEnum>(string local_path) : IDisposable
+public readonly struct EnumFile<TEnum>(string local_path) : IDisposable
 	where TEnum : struct, Enum
 {
 	readonly string local_path = local_path;
-	readonly string[] items = new string[enum_length];
+	readonly string[] items = new string[EnumLength];
 
-	public int LineCount => enum_length;
-	static readonly int enum_length = Enum.GetNames<TEnum>().Length;
+	public static readonly int EnumLength = Enum.GetNames<TEnum>().Length;
 
 	public string this[TEnum at]
 	{
@@ -37,7 +36,7 @@ public readonly struct LineFile<TEnum>(string local_path) : IDisposable
 		set => items[at] = value;
 	}
 
-	public static LineFile<TEnum> CreateOrOpen(string local_path)
+	public static EnumFile<TEnum> CreateOrOpen(string local_path)
 	{
 		if (!FileAccess.FileExists(local_path))
 			Create(local_path);
@@ -49,17 +48,17 @@ public readonly struct LineFile<TEnum>(string local_path) : IDisposable
 	{
 		using var file = FileAccess.Open(local_path, FileAccess.ModeFlags.Write);
 
-		foreach (var _ in enum_length)
+		foreach (var _ in EnumLength)
 			file.StoreLine("");
 	}
 
-	public static LineFile<TEnum> Open(string local_path)
+	public static EnumFile<TEnum> Open(string local_path)
 	{
-		var result = new LineFile<TEnum>(local_path);
+		var result = new EnumFile<TEnum>(local_path);
 
 		using var file = FileAccess.Open(local_path, FileAccess.ModeFlags.Read);
 
-		foreach (var i in enum_length)
+		foreach (var i in EnumLength)
 			result.items[i] = file.GetLine();
 
 		return result;
@@ -69,7 +68,7 @@ public readonly struct LineFile<TEnum>(string local_path) : IDisposable
 	{
 		using var file = FileAccess.Open(local_path, FileAccess.ModeFlags.Write);
 
-		foreach (var i in enum_length)
+		foreach (var i in EnumLength)
 			file.StoreLine(items[i]);
 	}
 
@@ -77,7 +76,7 @@ public readonly struct LineFile<TEnum>(string local_path) : IDisposable
 		where T : IParsable<T>
 	{
 #if FILE_CHECKS
-		CheckFieldAttribute(at, typeof(LineFileFieldAttribute<>).Name);
+		CheckFieldAttribute(at, typeof(EnumFileFieldAttribute<>).Name);
 		CheckFieldType<T>(at);
 #endif
 		return T.Parse(this[at], null);
@@ -87,7 +86,7 @@ public readonly struct LineFile<TEnum>(string local_path) : IDisposable
 		where T : IParsable<T>
 	{
 #if FILE_CHECKS
-		CheckFieldAttribute(at, typeof(LineFileFieldAttribute<>).Name);
+		CheckFieldAttribute(at, typeof(EnumFileFieldAttribute<>).Name);
 		CheckFieldType<T>(at);
 #endif
 		this[at] = value.ToString() ?? "";
@@ -97,7 +96,7 @@ public readonly struct LineFile<TEnum>(string local_path) : IDisposable
 		where T : IParsable<T>
 	{
 #if FILE_CHECKS
-		CheckFieldAttribute(at, typeof(LineFileArrayAttribute<>).Name);
+		CheckFieldAttribute(at, typeof(EnumFileArrayAttribute<>).Name);
 		CheckFieldType<T>(at);
 #endif
 		var split_items = this[at].Split(Constants.File.ItemSeparator);
@@ -117,7 +116,7 @@ public readonly struct LineFile<TEnum>(string local_path) : IDisposable
 		where T : IParsable<T>
 	{
 #if FILE_CHECKS
-		CheckFieldAttribute(at, typeof(LineFileArrayAttribute<>).Name);
+		CheckFieldAttribute(at, typeof(EnumFileArrayAttribute<>).Name);
 		CheckFieldType<T>(at);
 #endif
 		var result = new string[values.Length];
@@ -130,7 +129,7 @@ public readonly struct LineFile<TEnum>(string local_path) : IDisposable
 
 	public IEnumerator<string> GetEnumerator()
 	{
-		foreach (var i in enum_length)
+		foreach (var i in EnumLength)
 			yield return items[i];
 	}
 

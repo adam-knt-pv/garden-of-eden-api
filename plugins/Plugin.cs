@@ -122,6 +122,6 @@ public interface Plugin<TPlugin> : Plugin
 
 		static TScene New() => scenes[id].Instantiate<TScene>();
 
-		static new PackedScene Packed(string scene) => scenes[id];
+		static PackedScene Packed() => scenes[id];
 	}
 }
