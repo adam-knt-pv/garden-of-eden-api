@@ -22,6 +22,7 @@ public readonly struct EnumFile<TEnum>(string local_path) : IDisposable
 	readonly string local_path = local_path;
 	readonly string[] items = new string[EnumLength];
 
+	public int LineCount => EnumLength;
 	public static readonly int EnumLength = Enum.GetNames<TEnum>().Length;
 
 	public string this[TEnum at]
