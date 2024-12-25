@@ -17,7 +17,7 @@ public interface Plugin
 		{
 			foreach (var i in scene_files.Count)
 			{
-				if (scene_files[i].EndsWith($"{type.Name.ToSnakeCase()}.tscn"))
+				if (scene_files[i].EndsWith($"{type.Name.ToDashCase()}.tscn"))
 				{
 					scenes.Append((type, scene_files[i]));
 					scene_files.Remove(i);
@@ -120,8 +120,8 @@ public interface Plugin<TPlugin> : Plugin
 	{
 		private static int id = -1;
 
-		static TScene New() => scenes[id].Instantiate<TScene>();
+		static new TScene New => scenes[id].Instantiate<TScene>();
 
-		static PackedScene Packed() => scenes[id];
+		static new PackedScene Packed => scenes[id];
 	}
 }
