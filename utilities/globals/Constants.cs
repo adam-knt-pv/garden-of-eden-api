@@ -8,11 +8,6 @@ public interface Constants : ToolKit.Globals.Constants
 
 	new interface Reflection : ToolKit.Globals.Constants.Reflection;
 
-	interface Node
-	{
-		const string RootPath = "/root";
-	}
-
 	interface Multiplayer
 	{
 		const char ServerAddressSeparator = '#';
