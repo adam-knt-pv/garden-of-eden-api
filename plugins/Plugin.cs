@@ -69,10 +69,10 @@ public interface Plugin<TPlugin> : Plugin
 	/// <summary>
 	/// The current (latest) version of the plugin.
 	/// </summary>
-	static PluginVersion Version = TPlugin.version_history[0];
+	static PluginVersion Version { get; } = TPlugin.version_history[0];
 
-	static string DirPath = "res://";
-	static string DataDirPath = $"user://{Version.ToFilename()}/";
+	static string DirPath { get; } = "res://";
+	static string DataDirPath { get; } = $"user://{Version.ToFilename()}/";
 
 	protected static abstract PluginVersion[] version_history { get; }
 

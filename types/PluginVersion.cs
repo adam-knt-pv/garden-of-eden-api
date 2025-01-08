@@ -2,15 +2,15 @@
 
 namespace pathmage.KnightmareEngine;
 
-public readonly struct PluginVersion : IParsable<PluginVersion>
+public struct PluginVersion : IParsable<PluginVersion>
 {
-	public static PluginVersion Null = "Indev v-1.-1.-1";
+	public static PluginVersion Null { get; } = "Indev v-1.-1.-1";
 
-	public Phases Phase { get; }
-	public int Prefix { get; }
-	public int Major { get; }
-	public int Minor { get; }
-	public int Suffix { get; } = -1;
+	public Phases Phase { get; set; }
+	public int Prefix { get; set; }
+	public int Major { get; set; }
+	public int Minor { get; set; }
+	public int Suffix { get; set; } = -1;
 
 	public static implicit operator PluginVersion((Phases Phase, string Version) version) =>
 		new(version.Phase, version.Version);

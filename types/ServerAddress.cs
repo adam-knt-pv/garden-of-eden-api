@@ -2,15 +2,15 @@
 
 namespace pathmage.KnightmareEngine;
 
-public readonly struct ServerAddress : IParsable<ServerAddress>
+public struct ServerAddress : IParsable<ServerAddress>
 {
-	public static ServerAddress Null = "";
+	public static ServerAddress Null { get; } = "";
 
 	/// <summary>
 	/// Either a fully qualified domain name or an IP address in IPv4 or IPv6 format.
 	/// </summary>
-	public string Address { get; }
-	public int Port { get; }
+	public string Address { get; set; }
+	public int Port { get; set; }
 
 	public static implicit operator ServerAddress(string from) => new(from);
 
