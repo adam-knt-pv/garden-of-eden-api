@@ -4,6 +4,8 @@ namespace pathmage.KnightmareEngine;
 
 public readonly struct ServerAddress : IParsable<ServerAddress>
 {
+	public static ServerAddress Null = "";
+
 	/// <summary>
 	/// Either a fully qualified domain name or an IP address in IPv4 or IPv6 format.
 	/// </summary>
