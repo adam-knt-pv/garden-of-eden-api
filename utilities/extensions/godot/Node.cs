@@ -4,6 +4,14 @@ namespace pathmage.KnightmareEngine;
 
 partial class Extensions
 {
+	public static void QueueFreeIfValid(this Node node)
+	{
+		if (!GodotObject.IsInstanceValid(node))
+			return;
+
+		node.QueueFree();
+	}
+
 	public static bool TryGetNode(
 		this Node parent,
 		NodePath path,
