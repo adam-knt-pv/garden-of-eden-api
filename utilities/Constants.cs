@@ -16,7 +16,9 @@ public interface Constants : ToolKit.Globals.Constants
 		const int DefaultPort = 5252;
 		const int MaxPort = 65535;
 
-		const int MaxClients = 4095;
+		const int MinPlayers = 1;
+		const int DefaultPlayers = 8;
+		const int MaxPlayers = 4095;
 	}
 
 	interface InputMap;

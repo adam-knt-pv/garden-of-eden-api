@@ -5,12 +5,12 @@ using System.Reflection;
 
 namespace pathmage.KnightmareEngine;
 
-public interface Plugin
+public interface Plugin : ToolKit.Globals.Plugin
 {
 	static void Load(Assembly assembly, string local_path)
 	{
 		var scene_types = assembly.GetTypesWithInterface<Scene>();
-		var scene_files = local_path.FindSceneFiles();
+		var scene_files = FileHelper.FindSceneFiles(local_path);
 		var scenes = Vec<(Type Type, string LocalPath)>.With(scene_types.Count);
 
 		foreach (var type in scene_types)
@@ -71,8 +71,7 @@ public interface Plugin<TPlugin> : Plugin
 	/// </summary>
 	static PluginVersion Version { get; } = TPlugin.version_history[0];
 
-	static string DirPath { get; } = "res://";
-	static string DataDirPath { get; } = $"user://{Version.ToFilename()}/";
+	static string RootPath { get; } = $"user://{Version.ToFilename()}/";
 
 	protected static abstract PluginVersion[] version_history { get; }
 
@@ -80,7 +79,7 @@ public interface Plugin<TPlugin> : Plugin
 
 	static Plugin()
 	{
-		DirAccess.MakeDirAbsolute(DataDirPath);
+		DirAccess.MakeDirAbsolute(RootPath);
 	}
 
 	static void Load() => Load(typeof(TPlugin).Assembly, "res://");

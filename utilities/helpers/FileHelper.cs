@@ -2,14 +2,15 @@
 using System.Linq;
 using System.Reflection;
 
-namespace pathmage.KnightmareEngine;
+namespace pathmage.KnightmareEngine.Helpers;
 
-partial class Extensions
+public interface FileHelper
 {
-	public static Set<string> PickSceneFiles(this string local_path)
+	public static Set<string> PickSceneFiles(string local_path)
 	{
-		var result = local_path.PickFilesThat(file =>
-			file.TrimSuffix(".remap").GetExtension() == "tscn"
+		var result = PickFilesThat(
+			local_path,
+			file => file.TrimSuffix(".remap").GetExtension() == "tscn"
 		);
 
 		foreach (var i in result.Count)
@@ -18,7 +19,7 @@ partial class Extensions
 		return result;
 	}
 
-	public static Set<string> PickFilesThat(this string local_path, Func<string, bool> filter)
+	public static Set<string> PickFilesThat(string local_path, Func<string, bool> filter)
 	{
 		var files = DirAccess.Open(local_path).GetFiles();
 		var result = Set<string>.With(files.Length);
@@ -30,9 +31,10 @@ partial class Extensions
 		return result;
 	}
 
-	public static Set<string> FindSceneFiles(this string local_path, params string[] exclude_dirs)
+	public static Set<string> FindSceneFiles(string local_path, params string[] exclude_dirs)
 	{
-		var result = local_path.FindFilesThat(
+		var result = FindFilesThat(
+			local_path,
 			file => file.TrimSuffix(".remap").GetExtension() == "tscn",
 			exclude_dirs
 		);
@@ -44,7 +46,7 @@ partial class Extensions
 	}
 
 	public static Set<string> FindFilesThat(
-		this string local_path,
+		string local_path,
 		Func<string, bool> filter,
 		params string[] exclude_dirs
 	)

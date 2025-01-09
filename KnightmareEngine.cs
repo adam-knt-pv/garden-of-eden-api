@@ -1,6 +1,7 @@
 global using System;
 global using Godot;
 global using pathmage.KnightmareEngine.Globals;
+global using pathmage.KnightmareEngine.Helpers;
 global using pathmage.ToolKit;
 global using pathmage.ToolKit.Collections;
 global using static pathmage.ToolKit.Debug.ILogger;
@@ -15,7 +16,7 @@ public sealed partial class KnightmareEngine : Node
 {
 	KnightmareEngine()
 	{
-		Project.Logger = new LoggerWrapper(GD.Print);
+		Plugin.Logger = new LoggerWrapper(GD.Print);
 	}
 
 	public override void _Ready() { }
