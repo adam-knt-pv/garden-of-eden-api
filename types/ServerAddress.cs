@@ -2,7 +2,7 @@
 
 namespace pathmage.KnightmareEngine;
 
-public struct ServerAddress : IParsable<ServerAddress>
+public struct ServerAddress
 {
 	public static ServerAddress Null { get; } = "";
 
@@ -30,22 +30,4 @@ public struct ServerAddress : IParsable<ServerAddress>
 
 	public override string ToString() =>
 		$"{Address}{Constants.Multiplayer.ServerAddressSeparator}{Port}";
-
-	public static ServerAddress Parse(string s, IFormatProvider? provider) => new(s);
-
-	public static bool TryParse(
-		[NotNullWhen(true)] string? s,
-		IFormatProvider? provider,
-		out ServerAddress result
-	)
-	{
-		if (s != null)
-		{
-			result = new(s);
-			return true;
-		}
-
-		result = default;
-		return false;
-	}
 }

@@ -2,20 +2,30 @@
 
 namespace pathmage.KnightmareEngine;
 
-public struct PluginVersion : IParsable<PluginVersion>
+public struct PluginVersion
 {
 	public static PluginVersion Null { get; } = "Indev v-1.-1.-1";
 
-	public Phases Phase { get; set; }
+	public DevelopmentPhase Phase { get; set; }
+
+	public enum DevelopmentPhase
+	{
+		Indev,
+		Alpha,
+		Beta,
+		Release,
+	}
+
 	public int Prefix { get; set; }
 	public int Major { get; set; }
 	public int Minor { get; set; }
 	public int Suffix { get; set; } = -1;
 
-	public static implicit operator PluginVersion((Phases Phase, string Version) version) =>
-		new(version.Phase, version.Version);
+	public static implicit operator PluginVersion(
+		(DevelopmentPhase Phase, string Version) version
+	) => new(version.Phase, version.Version);
 
-	public PluginVersion(Phases phase, string version)
+	public PluginVersion(DevelopmentPhase phase, string version)
 		: this($"{phase} {version}") { }
 
 	public static implicit operator PluginVersion(string version) => new(version);
@@ -23,7 +33,7 @@ public struct PluginVersion : IParsable<PluginVersion>
 	public PluginVersion(string version)
 	{
 		var phase_version = version.Split(' ');
-		Phase = Enum.Parse<Phases>(phase_version[0]);
+		Phase = Enum.Parse<DevelopmentPhase>(phase_version[0]);
 
 		var split_version = phase_version[1].Split('.', '_');
 		Prefix = int.Parse(split_version[0][0] == 'v' ? split_version[0][1..] : split_version[0]);
@@ -43,36 +53,12 @@ public struct PluginVersion : IParsable<PluginVersion>
 
 	public static PluginVersion FromFilename(string filename)
 	{
-		var i = filename.IndexOf('-');
-		var phase_version = new[] { filename[1..i], filename[(i + 1)..] };
+		var i_dash = filename.IndexOf('-');
+
+		var phase_version = new[] { filename[1..i_dash], filename[(i_dash + 1)..] };
+
 		return new PluginVersion(
 			$"{phase_version[0][0].ToUpper()}{phase_version[0][1..]} {phase_version[1]}"
 		);
-	}
-
-	public static PluginVersion Parse(string s, IFormatProvider? provider) => new(s);
-
-	public static bool TryParse(
-		[NotNullWhen(true)] string? s,
-		IFormatProvider? provider,
-		out PluginVersion result
-	)
-	{
-		if (s != null)
-		{
-			result = new(s);
-			return true;
-		}
-
-		result = Null;
-		return false;
-	}
-
-	public enum Phases
-	{
-		Indev,
-		Alpha,
-		Beta,
-		Release,
 	}
 }
