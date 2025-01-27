@@ -6,52 +6,52 @@ namespace pathmage.KnightmareEngine.Helpers;
 
 public interface FileHelper
 {
-	public static Set<string> PickSceneFiles(string local_path)
+	public static SetArray<string> PickSceneFiles(string local_path)
 	{
-		var result = PickFilesThat(
+		var output = PickFilesThat(
 			local_path,
 			file => file.TrimSuffix(".remap").GetExtension() == "tscn"
 		);
 
-		foreach (var i in result.Count)
-			result[i] = result[i].TrimSuffix(".remap");
+		foreach (var i in output.Count)
+			output[i] = output[i].TrimSuffix(".remap");
 
-		return result;
+		return output;
 	}
 
-	public static Set<string> PickFilesThat(string local_path, Func<string, bool> filter)
+	public static SetArray<string> PickFilesThat(string local_path, Func<string, bool> filter)
 	{
 		var files = DirAccess.Open(local_path).GetFiles();
-		var result = Set<string>.With(files.Length);
+		var output = SetArray<string>.New(files.Length);
 
 		foreach (var file in files)
 			if (filter(file))
-				result.Append(local_path.PathJoin(file));
+				output.Append(local_path.PathJoin(file));
 
-		return result;
+		return output;
 	}
 
-	public static Set<string> FindSceneFiles(string local_path, params string[] exclude_dirs)
+	public static SetArray<string> FindSceneFiles(string local_path, params string[] exclude_dirs)
 	{
-		var result = FindFilesThat(
+		var output = FindFilesThat(
 			local_path,
 			file => file.TrimSuffix(".remap").GetExtension() == "tscn",
 			exclude_dirs
 		);
 
-		foreach (var i in result.Count)
-			result[i] = result[i].TrimSuffix(".remap");
+		foreach (var i in output.Count)
+			output[i] = output[i].TrimSuffix(".remap");
 
-		return result;
+		return output;
 	}
 
-	public static Set<string> FindFilesThat(
+	public static SetArray<string> FindFilesThat(
 		string local_path,
 		Func<string, bool> filter,
 		params string[] exclude_dirs
 	)
 	{
-		var result = Set<string>.With(100);
+		var output = SetArray<string>.New(Constants.KnightmareEngine.FindFilesInitLength);
 
 		searchDir(local_path);
 
@@ -61,7 +61,7 @@ public interface FileHelper
 
 			foreach (var file in curr_dir.GetFiles())
 				if (filter(file))
-					result.Append(at_path.PathJoin(file));
+					output.Append(at_path.PathJoin(file));
 
 			foreach (var child_dir in curr_dir.GetDirectories())
 			{
@@ -79,6 +79,6 @@ public interface FileHelper
 			}
 		}
 
-		return result;
+		return output;
 	}
 }

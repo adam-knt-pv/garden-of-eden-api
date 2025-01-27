@@ -184,24 +184,24 @@ partial class Extensions
 		}
 	}
 
-	public static Set<TNode> PickChildren<TNode>(this Node parent)
+	public static SetArray<TNode> PickChildren<TNode>(this Node parent)
 		where TNode : Node
 	{
-		var result = Set<TNode>.With(16);
+		var output = SetArray<TNode>.New(Constants.KnightmareEngine.PickChildrenInitLength);
 
 		foreach (var child in parent.GetChildren())
 		{
 			if (child is TNode t_child)
-				result.Append(t_child);
+				output.Append(t_child);
 		}
 
-		return result;
+		return output;
 	}
 
-	public static Set<TNode> FindChildren<TNode>(this Node parent)
+	public static SetArray<TNode> FindChildren<TNode>(this Node parent)
 		where TNode : Node
 	{
-		var result = Set<TNode>.With(16);
+		var output = SetArray<TNode>.New(Constants.KnightmareEngine.PickChildrenInitLength);
 
 		searchChildren(parent);
 
@@ -210,46 +210,46 @@ partial class Extensions
 			foreach (var child in node.GetChildren())
 			{
 				if (child is TNode t_child)
-					result.Append(t_child);
+					output.Append(t_child);
 
 				if (child.GetChildCount() > 0)
 					searchChildren(child);
 			}
 		}
 
-		return result;
+		return output;
 	}
 
-	public static Set<Node> PickChildrenThat(this Node parent, Func<Node, bool> filter)
+	public static SetArray<Node> PickChildrenThat(this Node parent, Func<Node, bool> filter)
 	{
-		var result = Set<Node>.With(16);
+		var output = SetArray<Node>.New(Constants.KnightmareEngine.PickChildrenInitLength);
 
 		foreach (var child in parent.GetChildren())
 		{
 			if (filter(child))
-				result.Append(child);
+				output.Append(child);
 		}
 
-		return result;
+		return output;
 	}
 
-	public static Set<TNode> PickChildrenThat<TNode>(this Node parent, Func<TNode, bool> filter)
+	public static SetArray<TNode> PickChildrenThat<TNode>(this Node parent, Func<TNode, bool> filter)
 		where TNode : Node
 	{
-		var result = Set<TNode>.With(16);
+		var output = SetArray<TNode>.New(Constants.KnightmareEngine.PickChildrenInitLength);
 
 		foreach (var child in parent.GetChildren())
 		{
 			if (child is TNode t_child && filter(t_child))
-				result.Append(t_child);
+				output.Append(t_child);
 		}
 
-		return result;
+		return output;
 	}
 
-	public static Set<Node> FindChildrenThat(this Node parent, Func<Node, bool> filter)
+	public static SetArray<Node> FindChildrenThat(this Node parent, Func<Node, bool> filter)
 	{
-		var result = Set<Node>.With(32);
+		var output = SetArray<Node>.New(Constants.KnightmareEngine.FindChildrenExpectedLength);
 
 		searchChildren(parent);
 
@@ -258,20 +258,20 @@ partial class Extensions
 			foreach (var child in node.GetChildren())
 			{
 				if (filter(child))
-					result.Append(child);
+					output.Append(child);
 
 				if (child.GetChildCount() > 0)
 					searchChildren(child);
 			}
 		}
 
-		return result;
+		return output;
 	}
 
-	public static Set<TNode> FindChildrenThat<TNode>(this Node parent, Func<TNode, bool> filter)
+	public static SetArray<TNode> FindChildrenThat<TNode>(this Node parent, Func<TNode, bool> filter)
 		where TNode : Node
 	{
-		var result = Set<TNode>.With(32);
+		var output = SetArray<TNode>.New(Constants.KnightmareEngine.FindChildrenExpectedLength);
 
 		searchChildren(parent);
 
@@ -280,13 +280,13 @@ partial class Extensions
 			foreach (var child in node.GetChildren())
 			{
 				if (child is TNode t_child && filter(t_child))
-					result.Append(t_child);
+					output.Append(t_child);
 
 				if (child.GetChildCount() > 0)
 					searchChildren(child);
 			}
 		}
 
-		return result;
+		return output;
 	}
 }
