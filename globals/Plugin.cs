@@ -10,7 +10,7 @@ public interface Plugin : ToolKit.Globals.Plugin
 	static void Load(Assembly assembly, string local_path)
 	{
 		var scene_types = assembly.GetTypesWithInterface<Scene>();
-		var scene_files = FileHelper.FindSceneFiles(local_path);
+		var scene_files = Files.FindSceneFiles(local_path);
 		var scenes = GrowArray<(Type Type, string LocalPath)>.New(scene_types.Count);
 
 		foreach (var type in scene_types)
@@ -35,7 +35,7 @@ public interface Plugin : ToolKit.Globals.Plugin
 
 		var plugin_scenes = new PackedScene[scene_types.Count];
 		plugin_scene_type
-			.GetField("scenes", Constants.Misc.AnyAccessModifierBindingFlags)!
+			.GetField("scenes", Constants.AnyAccessModifierBindingFlags)!
 			.SetValue(null, plugin_scenes);
 
 		var scene_to_id = new List<KeyValuePair<string, int>>();
@@ -49,14 +49,14 @@ public interface Plugin : ToolKit.Globals.Plugin
 				.MakeGenericType(plugin_impl_type, scenes[i].Type);
 
 			plugin_scene_gen_type
-				.GetField("id", Constants.Misc.AnyAccessModifierBindingFlags)!
+				.GetField("id", Constants.AnyAccessModifierBindingFlags)!
 				.SetValue(null, i);
 
 			scene_to_id.Add(new(scenes[i].Type.Name, i));
 		}
 
 		plugin_gen_type
-			.GetField("scene_to_id", Constants.Misc.AnyAccessModifierBindingFlags)!
+			.GetField("scene_to_id", Constants.AnyAccessModifierBindingFlags)!
 			.SetValue(null, scene_to_id.ToFrozenDictionary());
 	}
 

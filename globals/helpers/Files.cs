@@ -2,11 +2,13 @@
 using System.Linq;
 using System.Reflection;
 
-namespace pathmage.KnightmareEngine.Helpers;
+namespace pathmage.KnightmareEngine.Globals;
 
-public interface FileHelper
+public interface Files : ToolKit.Globals.Files
 {
-	public static SetArray<string> PickSceneFiles(string local_path)
+	private const int find_files_assumed_length = 16;
+
+	static SetArray<string> PickSceneFiles(string local_path)
 	{
 		var output = PickFilesThat(
 			local_path,
@@ -19,7 +21,7 @@ public interface FileHelper
 		return output;
 	}
 
-	public static SetArray<string> PickFilesThat(string local_path, Func<string, bool> filter)
+	static SetArray<string> PickFilesThat(string local_path, Func<string, bool> filter)
 	{
 		var files = DirAccess.Open(local_path).GetFiles();
 		var output = SetArray<string>.New(files.Length);
@@ -31,7 +33,7 @@ public interface FileHelper
 		return output;
 	}
 
-	public static SetArray<string> FindSceneFiles(string local_path, params string[] exclude_dirs)
+	static SetArray<string> FindSceneFiles(string local_path, params string[] exclude_dirs)
 	{
 		var output = FindFilesThat(
 			local_path,
@@ -45,13 +47,13 @@ public interface FileHelper
 		return output;
 	}
 
-	public static SetArray<string> FindFilesThat(
+	static SetArray<string> FindFilesThat(
 		string local_path,
 		Func<string, bool> filter,
 		params string[] exclude_dirs
 	)
 	{
-		var output = SetArray<string>.New(Constants.KnightmareEngine.FindFilesInitLength);
+		var output = SetArray<string>.New(find_files_assumed_length);
 
 		searchDir(local_path);
 

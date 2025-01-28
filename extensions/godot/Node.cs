@@ -1,9 +1,12 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace pathmage.KnightmareEngine;
+namespace pathmage.KnightmareEngine.Extensions;
 
 partial class Extensions
 {
+	const int pick_child_nodes_assumed_length = 16;
+	const int find_child_nodes_assumed_length = pick_child_nodes_assumed_length * 2;
+
 	public static void QueueFreeIfValid(this Node node)
 	{
 		if (!GodotObject.IsInstanceValid(node))
@@ -187,7 +190,7 @@ partial class Extensions
 	public static SetArray<TNode> PickChildren<TNode>(this Node parent)
 		where TNode : Node
 	{
-		var output = SetArray<TNode>.New(Constants.KnightmareEngine.PickChildrenInitLength);
+		var output = SetArray<TNode>.New(pick_child_nodes_assumed_length);
 
 		foreach (var child in parent.GetChildren())
 		{
@@ -201,7 +204,7 @@ partial class Extensions
 	public static SetArray<TNode> FindChildren<TNode>(this Node parent)
 		where TNode : Node
 	{
-		var output = SetArray<TNode>.New(Constants.KnightmareEngine.PickChildrenInitLength);
+		var output = SetArray<TNode>.New(find_child_nodes_assumed_length);
 
 		searchChildren(parent);
 
@@ -222,7 +225,7 @@ partial class Extensions
 
 	public static SetArray<Node> PickChildrenThat(this Node parent, Func<Node, bool> filter)
 	{
-		var output = SetArray<Node>.New(Constants.KnightmareEngine.PickChildrenInitLength);
+		var output = SetArray<Node>.New(pick_child_nodes_assumed_length);
 
 		foreach (var child in parent.GetChildren())
 		{
@@ -236,7 +239,7 @@ partial class Extensions
 	public static SetArray<TNode> PickChildrenThat<TNode>(this Node parent, Func<TNode, bool> filter)
 		where TNode : Node
 	{
-		var output = SetArray<TNode>.New(Constants.KnightmareEngine.PickChildrenInitLength);
+		var output = SetArray<TNode>.New(pick_child_nodes_assumed_length);
 
 		foreach (var child in parent.GetChildren())
 		{
@@ -249,7 +252,7 @@ partial class Extensions
 
 	public static SetArray<Node> FindChildrenThat(this Node parent, Func<Node, bool> filter)
 	{
-		var output = SetArray<Node>.New(Constants.KnightmareEngine.FindChildrenExpectedLength);
+		var output = SetArray<Node>.New(find_child_nodes_assumed_length);
 
 		searchChildren(parent);
 
@@ -271,7 +274,7 @@ partial class Extensions
 	public static SetArray<TNode> FindChildrenThat<TNode>(this Node parent, Func<TNode, bool> filter)
 		where TNode : Node
 	{
-		var output = SetArray<TNode>.New(Constants.KnightmareEngine.FindChildrenExpectedLength);
+		var output = SetArray<TNode>.New(pick_child_nodes_assumed_length);
 
 		searchChildren(parent);
 

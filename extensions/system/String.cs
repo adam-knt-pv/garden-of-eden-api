@@ -1,4 +1,4 @@
-﻿namespace pathmage.KnightmareEngine;
+﻿namespace pathmage.KnightmareEngine.Extensions;
 
 partial class Extensions
 {

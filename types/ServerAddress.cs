@@ -16,18 +16,17 @@ public struct ServerAddress
 
 	public ServerAddress(string from)
 	{
-		var address = from.Split(Constants.Multiplayer.ServerAddressSeparator);
+		var address = from.Split(Online.ServerAddressSeparator);
 		Address = address[0];
 
 		if (address.Length > 1 && int.TryParse(address[1], out var port))
 			Port = port;
 
-		if (Port is < Constants.Multiplayer.MinPort or > Constants.Multiplayer.MaxPort)
-			Port = Constants.Multiplayer.DefaultPort;
+		if (Port is < Online.MinPort or > Online.MaxPort)
+			Port = Online.DefaultPort;
 	}
 
 	public static implicit operator string(ServerAddress address) => address.ToString();
 
-	public override string ToString() =>
-		$"{Address}{Constants.Multiplayer.ServerAddressSeparator}{Port}";
+	public override string ToString() => $"{Address}{Online.ServerAddressSeparator}{Port}";
 }
