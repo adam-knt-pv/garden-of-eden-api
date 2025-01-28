@@ -6,9 +6,5 @@ public interface Constants : ToolKit.Globals.Constants
 
 	new interface Text : ToolKit.Globals.Constants.Text;
 
-	interface Multiplayer { }
-
 	interface InputMap;
-
-	internal interface KnightmareEngine { }
 }
