@@ -13,9 +13,9 @@ public interface IDataFile<TSelf> : IDataType<TSelf>
 		return TSelf.FromString(FileAccess.GetFileAsString(file_path));
 	}
 
-	static abstract void SaveFile(string file_path, TSelf value);
+	static abstract void SaveFile(string file_path, in TSelf value);
 
-	protected static void defaultSaveFile(string file_path, TSelf value)
+	protected static void defaultSaveFile(string file_path, in TSelf value)
 	{
 		using var file = FileAccess.Open(file_path, FileAccess.ModeFlags.Write);
 
