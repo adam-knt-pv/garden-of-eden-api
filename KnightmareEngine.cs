@@ -16,7 +16,7 @@ namespace pathmage.KnightmareEngine
 {
 	public sealed partial class KnightmareEngine : Node
 	{
-		KnightmareEngine()
+		static KnightmareEngine()
 		{
 			Plugin.Logger = new LoggerWrapper(GD.Print);
 		}
