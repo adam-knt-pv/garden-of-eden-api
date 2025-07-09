@@ -1,0 +1,19 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdamKnight.KnightmareEngine", "AdamKnight.KnightmareEngine.csproj", "{937F0994-0B99-487C-AFB9-F49B521178B7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		ExportDebug|Any CPU = ExportDebug|Any CPU
+		ExportRelease|Any CPU = ExportRelease|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{937F0994-0B99-487C-AFB9-F49B521178B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{937F0994-0B99-487C-AFB9-F49B521178B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{937F0994-0B99-487C-AFB9-F49B521178B7}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{937F0994-0B99-487C-AFB9-F49B521178B7}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{937F0994-0B99-487C-AFB9-F49B521178B7}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{937F0994-0B99-487C-AFB9-F49B521178B7}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+	EndGlobalSection
+EndGlobal

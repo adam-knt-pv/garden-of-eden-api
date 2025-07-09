@@ -11,9 +11,9 @@
     <PropertyGroup>
         <AssemblyName>AdamKnight.KnightmareEngine</AssemblyName>
         <RootNamespace>AdamKnight.KnightmareEngine</RootNamespace>
-        <Title>pathmage.KnightmareEngine</Title>
+        <Title>AdamKnight.KnightmareEngine</Title>
 <!--        <PackageId>pathmage.ToolKit</PackageId>-->
-        <Authors>Adam Knight (pathmage)</Authors>
+        <Authors>Adam Knight</Authors>
 <!--        <RepositoryUrl>https://github.com/pathmage-dev/knightmare-engine</RepositoryUrl>-->
 <!--        <PackageLicenseFile>LICENSE</PackageLicenseFile>-->
 <!--        <PackageReadmeFile>README.md</PackageReadmeFile>-->
