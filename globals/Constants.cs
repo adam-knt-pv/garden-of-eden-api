@@ -1,4 +1,4 @@
-﻿namespace pathmage.KnightmareEngine.Globals;
+﻿namespace AdamKnight.KnightmareEngine.Globals;
 
 public interface Constants : ToolKit.Globals.Constants
 {

@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace pathmage.KnightmareEngine;
+namespace AdamKnight.KnightmareEngine;
 
 public struct PluginVersion
 {

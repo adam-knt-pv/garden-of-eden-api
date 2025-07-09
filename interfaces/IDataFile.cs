@@ -1,4 +1,4 @@
-﻿namespace pathmage.KnightmareEngine;
+﻿namespace AdamKnight.KnightmareEngine;
 
 public interface IDataFile<TSelf> : IDataType<TSelf>
 	where TSelf : IDataFile<TSelf>, new()

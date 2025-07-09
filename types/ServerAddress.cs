@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using AdamKnight.KnightmareEngine.Globals;
 
-namespace pathmage.KnightmareEngine;
+namespace AdamKnight.KnightmareEngine;
 
 public struct ServerAddress
 {

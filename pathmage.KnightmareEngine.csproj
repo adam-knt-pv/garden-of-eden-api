@@ -9,8 +9,8 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <AssemblyName>pathmage.KnightmareEngine</AssemblyName>
-        <RootNamespace>pathmage.KnightmareEngine</RootNamespace>
+        <AssemblyName>AdamKnight.KnightmareEngine</AssemblyName>
+        <RootNamespace>AdamKnight.KnightmareEngine</RootNamespace>
         <Title>pathmage.KnightmareEngine</Title>
 <!--        <PackageId>pathmage.ToolKit</PackageId>-->
         <Authors>Adam Knight (pathmage)</Authors>
@@ -20,7 +20,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="pathmage.ToolKit" Version="1.1.10" />
+      <PackageReference Include="AdamKnight.ToolKit" Version="1.2.0" />
     </ItemGroup>
 
 <!--    <ItemGroup>-->

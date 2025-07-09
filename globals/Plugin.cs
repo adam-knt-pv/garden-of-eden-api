@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
+using AdamKnight.KnightmareEngine.Globals;
 
-namespace pathmage.KnightmareEngine;
+namespace AdamKnight.KnightmareEngine;
 
 public interface Plugin : ToolKit.Globals.Plugin
 {

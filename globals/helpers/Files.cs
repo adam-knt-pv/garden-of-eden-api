@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Reflection;
 
-namespace pathmage.KnightmareEngine.Globals;
+namespace AdamKnight.KnightmareEngine.Globals;
 
 public interface Files : ToolKit.Globals.Files
 {

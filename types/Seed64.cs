@@ -1,4 +1,4 @@
-﻿namespace pathmage.KnightmareEngine;
+﻿namespace AdamKnight.KnightmareEngine;
 
 /// <summary>
 /// 64-bit seed whose values are never 0.

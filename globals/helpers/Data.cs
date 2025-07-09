@@ -1,3 +1,3 @@
-﻿namespace pathmage.KnightmareEngine.Globals;
+﻿namespace AdamKnight.KnightmareEngine.Globals;
 
 public interface Data : ToolKit.Globals.Data;
