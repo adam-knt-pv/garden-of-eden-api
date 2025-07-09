@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://blnbcodbu2fxw"]
 
-[ext_resource type="Script" path="res://KnightmareEngine.cs" id="1_iwhwr"]
+[ext_resource type="Script" uid="uid://2wrj6fh2vn4q" path="res://KnightmareEngine.cs" id="1_iwhwr"]
 
 [node name="KnightmareEngine" type="Node"]
 script = ExtResource("1_iwhwr")
