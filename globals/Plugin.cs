@@ -18,7 +18,7 @@ public interface Plugin : ToolKit.Globals.Plugin
 		{
 			foreach (var i in scene_files.Count)
 			{
-				if (scene_files[i].EndsWith($"{type.Name.ToDashCase()}.tscn"))
+				if (scene_files[i].EndsWith($"/{type.Name.ToDashCase()}.tscn"))
 				{
 					scenes.Append((type, scene_files[i]));
 					scene_files.Remove(i);
